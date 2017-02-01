@@ -7,7 +7,7 @@ _basedir = os.path.abspath(os.path.dirname(__file__))
 # Not sure why this is here, TODO: Find out why
 DEBUG = False
 # This is where my db sits
-DB_URI = 'sqlite:///' + os.path.join(_basedir, 'pemoi.db')
+DB_URI = 'postgresql://user:password@localhost/pemoi'
 # This is so secret you don't even know about it
 SECRET_KEY = "askjbio3g4owiebtUH!?27gsAEG"
 # This is the folder in which users' folders are created
