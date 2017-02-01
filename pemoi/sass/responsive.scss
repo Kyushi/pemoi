@@ -1,0 +1,8 @@
+// Change layout for some very small screens
+@media screen and (max-width: 550px) {
+  .login-link {
+    float: left;
+    width: 100%;
+    min-height: 48px;
+  }
+}
