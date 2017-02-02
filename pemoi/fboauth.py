@@ -1,5 +1,6 @@
 """Facebook OAuth authentication"""
 
+import os
 import httplib2
 import json
 
@@ -10,6 +11,7 @@ from flask import request, \
 from pemoi import app
 
 from pmoi_helpers import json_response
+from config import _basedir
 
 import pmoi_auth
 
@@ -18,6 +20,8 @@ import pmoi_auth
 def fbconnect():
     """Connect to facebook OAuth API"""
 
+    # Load JSON file from base directory
+    json_file = os.path.join(_basedir, 'fb_client_secrets.json')
     # Compare and validate STATE parameter, return error if invalid
     if request.args.get('state') != login_session['state']:
         response = "Invalid STATE parameter"
@@ -26,8 +30,8 @@ def fbconnect():
     access_token = request.data
 
     # Exchange client token for long-lived server side token
-    app_id = json.loads(open('fb_client_secrets.json', 'r').read())['web']['app-id']
-    app_secret = json.loads(open('fb_client_secrets.json', 'r').read())['web']['app-secret']
+    app_id = json.loads(open(json_file, 'r').read())['web']['app-id']
+    app_secret = json.loads(open(json_file, 'r').read())['web']['app-secret']
     url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (app_id, app_secret, access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
