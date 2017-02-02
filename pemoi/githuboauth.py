@@ -4,6 +4,9 @@ import json
 import urllib
 import httplib2
 
+# import for debugging
+import os
+
 from flask import request, \
                   session as login_session, \
                   flash, \
@@ -31,6 +34,7 @@ def githubconnect():
     code = request.args.get('code')
     print "We've got a code: %s" % code
     # Load client id and secret from file
+    print os.path.dirname(__file__)
     client_id = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_id']
     client_secret = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_secret']
     print "We've got client id and secret: %s, %s" % (client_id, client_secret)
@@ -41,11 +45,7 @@ def githubconnect():
     url = 'https://github.com/login/oauth/access_token'
     # Get response with access_token or error from github
     h = httplib2.Http()
-    print "h: %s" % h
-    try:
-        response = h.request(url, 'POST', urllib.urlencode(params), headers=headers)
-    except Exception as e:
-        print e
+    response = h.request(url, 'POST', urllib.urlencode(params), headers=headers)
     print " Response: ", response
     # Read the actual result from the response
     result = json.loads(response[1])
