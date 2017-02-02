@@ -20,6 +20,7 @@ from pmoi_db_session import db_session
 def githubconnect():
     """Connect with github OAuth API"""
 
+    print "Github info incoming!"
     # Receive state from github
     state = request.args.get('state')
     # If state is not identical to db_session state, return error
@@ -28,6 +29,7 @@ def githubconnect():
         return redirect(url_for('login'))
     # Code is received from github
     code = request.args.get('code')
+    print "We've got a code: %s" % code
     # Load client id and secret from file
     client_id = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_id']
     client_secret = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_secret']
