@@ -57,8 +57,6 @@ def get_user_info(user_id):
     except:
         return None
 
-
-
 # Login page, creates state
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -94,7 +92,11 @@ def complete_signup():
             # Store user ID in session
             login_session['user_id'] = user_id
             # Finally, if everything is okay, create a user directory for uploads
-            os.mkdir(os.path.join(UPLOAD_FOLDER, username))
+            try:
+                os.mkdir(os.path.join(UPLOAD_FOLDER, username))
+                print "Created user directory successfully"
+            except Exception as e:
+                print e, "Could not create user directory"
             flash("Welcome to your Personal Museum of Inspiration, %s" % login_session['username'])
             return redirect('index')
 
