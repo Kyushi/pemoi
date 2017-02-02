@@ -3,8 +3,6 @@
 import json
 import urllib
 import httplib2
-
-# import for debugging
 import os
 
 from flask import request, \
@@ -16,6 +14,7 @@ from flask import request, \
 from pemoi import app
 from pmoi_auth import get_user_info, get_user_id
 from pmoi_db_session import db_session
+from config import _basedir
 
 
 # Connect with github
@@ -34,9 +33,9 @@ def githubconnect():
     code = request.args.get('code')
     print "We've got a code: %s" % code
     # Load client id and secret from file
-    print os.path.dirname(__file__)
-    client_id = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_id']
-    client_secret = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_secret']
+    json_file = os.path.join(_basedir, 'github_client_secrets.json')
+    client_id = json.loads(open(json_file, 'r').read())['web']['client_id']
+    client_secret = json.loads(open(json_file, 'r').read())['web']['client_secret']
     print "We've got client id and secret: %s, %s" % (client_id, client_secret)
     # Get parameters ready for requesting access token
     params = {'code': code, 'client_id': client_id, 'client_secret': client_secret, 'state':state}
