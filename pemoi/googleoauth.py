@@ -20,6 +20,8 @@ import pmoi_auth
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     """Connect with Google Oauth API"""
+
+    # Load JSON file form base directory
     json_file = os.path.join(_basedir, 'google_client_secrets.json')
     CLIENT_ID = json.loads(open(json_file,'r').read())['web']['client_id']
     if request.args.get('state') != login_session['state']:
