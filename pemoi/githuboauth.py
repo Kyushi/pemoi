@@ -33,6 +33,7 @@ def githubconnect():
     # Load client id and secret from file
     client_id = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_id']
     client_secret = json.loads(open('github_client_secrets.json', 'r').read())['web']['client_secret']
+    print "We've got client id and secret: %s, %s" % (client_id, client_secret)
     # Get parameters ready for requesting access token
     params = {'code': code, 'client_id': client_id, 'client_secret': client_secret, 'state':state}
     # Set headers to receive json encoded data
@@ -40,7 +41,11 @@ def githubconnect():
     url = 'https://github.com/login/oauth/access_token'
     # Get response with access_token or error from github
     h = httplib2.Http()
-    response = h.request(url, 'POST', urllib.urlencode(params), headers=headers)
+    print "h: %s" % h
+    try:
+        response = h.request(url, 'POST', urllib.urlencode(params), headers=headers)
+    except Exception as e:
+        print e
     print " Response: ", response
     # Read the actual result from the response
     result = json.loads(response[1])
