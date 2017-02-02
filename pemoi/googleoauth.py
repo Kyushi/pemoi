@@ -1,5 +1,6 @@
 """Google OAuth authentication"""
 
+import os
 import requests
 import json
 import httplib2
@@ -12,14 +13,15 @@ from flask import request, \
 
 from pemoi import app
 from pmoi_helpers import json_response, make_response
+from config import _basedir
 import pmoi_auth
 
 # Connect with Google+
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     """Connect with Google Oauth API"""
-
-    CLIENT_ID = json.loads(open('google_client_secrets.json','r').read())['web']['client_id']
+    json_file = os.path.join(_basedir, 'google_client_secrets.json')
+    CLIENT_ID = json.loads(open(json_file,'r').read())['web']['client_id']
     if request.args.get('state') != login_session['state']:
         response = "Invalid STATE parameter"
         return json_response(response, 401)
@@ -27,7 +29,7 @@ def gconnect():
     code = request.data
     try:
         # Upgrade the auth code into a credentials object
-        oauth_flow = flow_from_clientsecrets('google_client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(json_file, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
