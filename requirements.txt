@@ -2,3 +2,4 @@ httplib2>=0.10.3
 flask>=0.12.2
 oauth2client>=4.1.2
 flup==1.0.3
+sqlalchemy==1.2.3

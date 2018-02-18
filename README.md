@@ -26,6 +26,7 @@ ___
 - Httplib2
 - urllib
 - oauth2client
+- flup
 
 
 ### Quickstart ###
