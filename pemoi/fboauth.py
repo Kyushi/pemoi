@@ -2,7 +2,6 @@
 
 import os
 import httplib2
-import requests
 import json
 
 from flask import request, \
