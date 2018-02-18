@@ -12,10 +12,10 @@ from flask import flash, \
 
 from werkzeug.utils import secure_filename
 from pemoi import app
-from database_setup import Item, Category
-from pmoi_db_session import db_session
-from pmoi_cat import name_exists
-from pmoi_helpers import check_img_link
+from .database_setup import Item, Category
+from .pmoi_db_session import db_session
+from .pmoi_cat import name_exists
+from .pmoi_helpers import check_img_link
 
 # set allowed extensions for upload
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])

@@ -14,8 +14,7 @@ Each saved artwork can be either stored privately or publicly, in a category whi
 Users can sign up with their Facebook, Google or github accounts.
 ___
 ### Requirements ###
-- ability to run vagrant
-- Python 2.7
+- Python 3.6
 - Web browser
 - Shell
 - Google, Facebook or github account
@@ -26,6 +25,7 @@ ___
 - SQLAlchemy
 - Httplib2
 - urllib
+- oauth2client
 
 
 ### Quickstart ###

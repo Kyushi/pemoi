@@ -7,8 +7,8 @@ import re
 
 from flask import make_response
 from sqlalchemy.orm.exc import NoResultFound
-from pmoi_db_session import db_session
-from database_setup import User, Category
+from .pmoi_db_session import db_session
+from .database_setup import User, Category
 
 # Helper function for returning json
 def json_response(response_string, code):
@@ -29,7 +29,7 @@ def make_state():
     Return: Random string of ascii letters and digits of length 32.
     """
     return ''.join(random.choice(string.ascii_letters + string.digits)\
-                   for x in xrange(32))
+                   for x in range(32))
 
 # Verify user input
 def username_error(username):
@@ -47,7 +47,7 @@ def username_error(username):
                Alphanumeric and '.', '_' or '-' only.""" % username
     if get_user_by_username(username):
         return "Username %s is already taken" % username
-    print "Username checks out"
+    print("Username checks out")
     return None
 
 # Get user by username
@@ -86,10 +86,10 @@ def get_or_create_cat_zero():
     """
     try:
         cat_zero = db_session.query(Category).filter_by(id=0).one()
-        print "Found cat_zero, continue"
+        print("Found cat_zero, continue")
         return cat_zero
     except NoResultFound:
-        print "Category not found, creating cat_zero"
+        print("Category not found, creating cat_zero")
         cat_zero = Category(id=0,
                             name="No Category",
                             description="Catchall category for uncategorised \
@@ -98,7 +98,7 @@ def get_or_create_cat_zero():
                             public=True)
         db_session.add(cat_zero)
         db_session.commit()
-        print "cat_zero added"
+        print("cat_zero added")
         return cat_zero
 
 def get_or_create_admin():
@@ -110,10 +110,10 @@ def get_or_create_admin():
     """
     try:
         admin = db_session.query(User).filter_by(id=0).one()
-        print "Admin account exists, show page normally"
+        print("Admin account exists, show page normally")
         return admin
     except NoResultFound:
-        print "No admin found, cerating admin account"
+        print("No admin found, cerating admin account")
         admin = User(id=0,
                      name="Admin",
                      username="Admin",
@@ -122,5 +122,5 @@ def get_or_create_admin():
                      picture="/static/users/admin.jpg")
         db_session.add(admin)
         db_session.commit()
-        print "Admin created"
+        print("Admin created")
         return admin

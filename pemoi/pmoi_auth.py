@@ -8,12 +8,12 @@ from flask import session as login_session, \
                   redirect
 
 from pemoi import app
-from pmoi_helpers import make_state
-from pmoi_db_session import db_session
-from pmoi_helpers import username_error
-from database_setup import User
-from googleoauth import gdisconnect
-from fboauth import fbdisconnect
+from .pmoi_helpers import make_state
+from .pmoi_db_session import db_session
+from .pmoi_helpers import username_error
+from .database_setup import User
+from .googleoauth import gdisconnect
+from .fboauth import fbdisconnect
 from config import UPLOAD_FOLDER
 
 
@@ -84,7 +84,7 @@ def complete_signup():
         if 'email' in request.form:
             login_session['email'] = request.form['email']
         if not username_error(username):
-            print username
+            print(username)
             login_session['username'] = username
             login_session['about'] = about
             # Create user in db and receive new user ID
@@ -94,9 +94,9 @@ def complete_signup():
             # Finally, if everything is okay, create a user directory for uploads
             try:
                 os.mkdir(os.path.join(UPLOAD_FOLDER, username))
-                print "Created user directory successfully"
+                print("Created user directory successfully")
             except Exception as e:
-                print e, "Could not create user directory"
+                print(e, "Could not create user directory")
             flash("Welcome to your Personal Museum of Inspiration, %s" % login_session['username'])
             return redirect('index')
 

@@ -2,6 +2,7 @@
 
 import os
 import httplib2
+import requests
 import json
 
 from flask import request, \
@@ -10,10 +11,10 @@ from flask import request, \
 
 from pemoi import app
 
-from pmoi_helpers import json_response
+from .pmoi_helpers import json_response
 from config import _basedir
 
-import pmoi_auth
+from . import pmoi_auth
 
 # Connect with Facebook
 @app.route('/fbconnect', methods=['POST'])

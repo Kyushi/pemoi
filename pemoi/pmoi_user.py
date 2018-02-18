@@ -9,12 +9,12 @@ from flask import render_template, \
                   session as login_session
 
 from pemoi import app
-from pmoi_auth import get_user_info
-from pmoi_helpers import username_error
-from pmoi_cat import get_categories
-from pmoi_db_session import db_session
-from pmoi_item import delete_file_and_row
-from database_setup import Category, Item, User
+from .pmoi_auth import get_user_info
+from .pmoi_helpers import username_error
+from .pmoi_cat import get_categories
+from .pmoi_db_session import db_session
+from .pmoi_item import delete_file_and_row
+from .database_setup import Category, Item, User
 
 @app.route('/profile/<int:user_id>/')
 def show_profile(user_id):

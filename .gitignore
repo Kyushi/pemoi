@@ -8,3 +8,4 @@ secret.py
 dbconnection.py
 .idea
 config.py
+pemoi/static/users/*

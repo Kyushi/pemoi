@@ -6,8 +6,8 @@ from flask import session as login_session, \
 from sqlalchemy import desc
 
 from pemoi import app
-from database_setup import Item
-from pmoi_db_session import db_session
+from .database_setup import Item
+from .pmoi_db_session import db_session
 
 @app.route('/')
 @app.route('/index/')

@@ -12,9 +12,9 @@ from flask import request, \
                   session as login_session
 
 from pemoi import app
-from pmoi_helpers import json_response, make_response
+from .pmoi_helpers import json_response, make_response
 from config import _basedir
-import pmoi_auth
+from . import pmoi_auth
 
 # Connect with Google+
 @app.route('/gconnect', methods=['POST'])

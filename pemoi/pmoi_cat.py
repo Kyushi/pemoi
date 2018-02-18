@@ -8,8 +8,8 @@ from flask import flash, \
                   session as login_session, \
                   jsonify
 
-from database_setup import Category, Item
-from pmoi_db_session import db_session
+from .database_setup import Category, Item
+from .pmoi_db_session import db_session
 from pemoi import app
 
 ### Helpers for categories

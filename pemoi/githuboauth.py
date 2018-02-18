@@ -1,7 +1,7 @@
 """Github OAuth authentication"""
 
 import json
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import httplib2
 import os
 
@@ -12,8 +12,8 @@ from flask import request, \
                   url_for
 
 from pemoi import app
-from pmoi_auth import get_user_info, get_user_id
-from pmoi_db_session import db_session
+from .pmoi_auth import get_user_info, get_user_id
+from .pmoi_db_session import db_session
 from config import _basedir
 
 
@@ -22,7 +22,7 @@ from config import _basedir
 def githubconnect():
     """Connect with github OAuth API"""
 
-    print "Github info incoming!"
+    print("Github info incoming!")
     # Receive state from github
     state = request.args.get('state')
     # If state is not identical to db_session state, return error
@@ -31,12 +31,12 @@ def githubconnect():
         return redirect(url_for('login'))
     # Code is received from github
     code = request.args.get('code')
-    print "We've got a code: %s" % code
+    print("We've got a code: %s" % code)
     # Load client id and secret from file
     json_file = os.path.join(_basedir, 'github_client_secrets.json')
     client_id = json.loads(open(json_file, 'r').read())['web']['client_id']
     client_secret = json.loads(open(json_file, 'r').read())['web']['client_secret']
-    print "We've got client id and secret: %s, %s" % (client_id, client_secret)
+    print("We've got client id and secret: %s, %s" % (client_id, client_secret))
     # Get parameters ready for requesting access token
     params = {'code': code, 'client_id': client_id, 'client_secret': client_secret, 'state':state}
     # Set headers to receive json encoded data
@@ -44,8 +44,8 @@ def githubconnect():
     url = 'https://github.com/login/oauth/access_token'
     # Get response with access_token or error from github
     h = httplib2.Http()
-    response = h.request(url, 'POST', urllib.urlencode(params), headers=headers)
-    print " Response: ", response
+    response = h.request(url, 'POST', urllib.parse.urlencode(params), headers=headers)
+    print(" Response: ", response)
     # Read the actual result from the response
     result = json.loads(response[1])
     # Let the user know if there was an error
