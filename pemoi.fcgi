@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/usr/bin/env python3.6
 from flipflop import WSGIServer
 from pemoi import app
 
