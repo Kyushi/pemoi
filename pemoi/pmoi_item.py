@@ -72,11 +72,14 @@ def new_item():
                                 login_session['username'])
             save_path = os.path.join(path, filename)
             file.save(save_path)
-            link = os.path.join('/',
-                                'static',
-                                'users',
-                                login_session['username'],
-                                filename)
+            link = url_for(
+                'static', 
+                filename=os.path.join(
+                    'users',
+                    login_session['username'],
+                    filename
+                )
+            )
         # 'link' will be empty if no file was uploaded. In that case, the user
         # should provide an image link.
         if not link:

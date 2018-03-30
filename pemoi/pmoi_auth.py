@@ -15,7 +15,7 @@ from .pmoi_helpers import username_error
 from .database_setup import User
 from .googleoauth import gdisconnect
 from .fboauth import fbdisconnect
-from config import UPLOAD_FOLDER
+from config import UPLOAD_FOLDER, __basedir
 
 
 # Create user entry
@@ -66,7 +66,7 @@ def login():
     # Generate STATE parameter for OAuth and store in session
     state = make_state()
     login_session['state'] = state
-    return render_template('login.html', STATE = state)
+    return render_template('login.html', STATE=state, BASE_URL=__basedir)
 
 @app.route('/completesignup/', methods=['GET', 'POST'])
 def complete_signup():
