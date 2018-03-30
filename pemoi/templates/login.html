@@ -59,8 +59,10 @@
 <!-- Create STATE as js variable to pass to external js -->
 <script type="text/javascript">
   $(document).ready(function(){
-    $state = "{{STATE}}";
-    $baseUrl = "{{url_for('index')}}";
+    $state = "{{STATE}}"
+  })
+  $(document).ready(function(){
+    $base_url = "{{BASE_URL}}"
   })
 </script>
 {% endblock %}

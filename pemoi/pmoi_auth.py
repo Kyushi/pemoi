@@ -15,7 +15,7 @@ from .pmoi_helpers import username_error
 from .database_setup import User
 from .googleoauth import gdisconnect
 from .fboauth import fbdisconnect
-from config import UPLOAD_FOLDER, _basedir
+from config import UPLOAD_FOLDER, URL_INSERT
 
 
 # Create user entry

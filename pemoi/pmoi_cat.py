@@ -126,7 +126,7 @@ def show_category(category_id):
 def new_category():
     """Create new category or render page for submiting a new category"""
     if 'user_id' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('login'))
     if request.method == 'POST':
         public = True if request.form.get('public') else False
         category = Category(name=request.form['name'],
@@ -153,7 +153,7 @@ def edit_category(category_id):
         category = db_session.query(Category).filter_by(id=category_id).one()
     except:
         flash("This category does not exist yet")
-        return redirect('/')
+        return redirect(url_for('index'))
     if 'user_id' not in login_session:
         flash("Please log in to edit categories.")
         return redirect(url_for('login'))
