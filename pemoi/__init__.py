@@ -3,6 +3,8 @@ from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object('config')
+# Get static path from config
+app.static_url_path=app.config.get('STATIC_FOLDER')
 
 import pemoi.pmoi_auth
 import pemoi.pmoi_cat
