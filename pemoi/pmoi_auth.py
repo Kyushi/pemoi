@@ -66,7 +66,7 @@ def login():
     # Generate STATE parameter for OAuth and store in session
     state = make_state()
     login_session['state'] = state
-    return render_template('login.html', STATE=state, BASE_URL=__basedir)
+    return render_template('login.html', STATE=state, BASE_URL=_basedir)
 
 @app.route('/completesignup/', methods=['GET', 'POST'])
 def complete_signup():
