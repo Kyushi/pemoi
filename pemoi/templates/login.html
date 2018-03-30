@@ -56,10 +56,11 @@
 {% block script %}
 <!-- Link Google's JS -->
 <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-<!-- Create STATE as js varaible to pass to external js -->
+<!-- Create STATE as js variable to pass to external js -->
 <script type="text/javascript">
   $(document).ready(function(){
-    $state = "{{STATE}}"
+    $state = "{{STATE}}";
+    $baseUrl = "{{url_for('index')}}";
   })
 </script>
 {% endblock %}

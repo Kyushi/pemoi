@@ -4,7 +4,7 @@ function signInCallback(authResult){
     // Send one-time-use code to the server, if successful, display welcome message
     $.ajax({
       type: 'POST',
-      url: '/gconnect?state='+$state,
+      url: $base_url + '/gconnect?state='+$state,
       processData: false,
       contentType: 'application/octet-stream; charset=utf-8',
       data: authResult['code'],
@@ -13,13 +13,13 @@ function signInCallback(authResult){
           if (result != "new") {
             $('#result').html('Login successful for:<br>' + result + '<br>Redirecting to start page ...')
             setTimeout(function() {
-              window.location.href = '/index/';
+              window.location.href = $base_url;
             }, 3000);
           }
           else {
             $('#result').html('Thanks for signing in. Please complete the sign up. Redirecting ...')
             setTimeout(function() {
-              window.location.href = '/completesignup/';
+              window.location.href = $base_url + '/completesignup/';
             }, 4000);
           }
         }
@@ -62,7 +62,7 @@ function sendTokenToServer() {
     console.log('Successful login for: ' + response.name);
     $.ajax({
       type: 'POST',
-      url: '/fbconnect?state='+$state,
+      url: $base_url + '/fbconnect?state='+$state,
       processData: false,
       data: access_token,
       contentType: 'application/octet-stream; charset=utf-8',
@@ -78,7 +78,7 @@ function sendTokenToServer() {
         else {
            $('#result').html('Welcome back, ' + result + '!<br>Redirecting to start page ...')
            setTimeout(function() {
-             window.location.href = "/index"
+             window.location.href = $base_url
            }, 2000);
          }
       } else {
@@ -111,7 +111,7 @@ function catNameCheck() {
     // Use Ajax to check category name in the background.
     $.ajax({
       type: 'POST',
-      url: '/checkcatname',
+      url: $base_url + '/checkcatname',
       data: JSON.stringify($data),
       contentType: 'application/json; charset=utf-8',
       success: function(result) {

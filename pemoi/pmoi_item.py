@@ -45,13 +45,13 @@ def show_item(item_id):
         item = db_session.query(Item).filter_by(id=item_id).one()
     except:
         flash("This item does not exist")
-        return redirect('/')
+        return redirect(url_for('index'))
     # Make sure that user is authorised to see the item
     if item.public or item.user_id == login_session.get('user_id'):
         return render_template('showitem.html', item=item)
     else:
         flash("This item is not public and belongs to somebody else.")
-        return redirect('/')
+        return redirect(url_for('index'))
 
 # Create a new item
 @app.route('/inspiration/new/', methods=['GET', 'POST'])
@@ -137,7 +137,7 @@ def edit_item(item_id):
         item = db_session.query(Item).filter_by(id=item_id).one()
     except:
         flash("This item does not exist")
-        return redirect('/')
+        return redirect(url_for('index'))
     if request.method == 'POST' and item.user_id == login_session['user_id']:
         item.title = request.form['title']
         item.artist = request.form['artist']
@@ -176,7 +176,7 @@ def delete_item(item_id):
         # The actual item deletion is handled via another function.
         delete_file_and_row(item)
         flash("Item %s deleted!" % item.title)
-        return redirect('/')
+        return redirect(url_for('index'))
     else:
         return render_template('deleteitem.html',
                                item=item)

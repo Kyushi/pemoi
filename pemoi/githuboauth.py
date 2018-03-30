@@ -91,6 +91,6 @@ def githubconnect():
             db_session.add(user)
             db_session.commit()
             flash("Thanks for logging in, %s" % login_session['username'])
-            return redirect('/')
+            return redirect(url_for('index'))
     # If user doesn't exist, redirect to complete signup
     return redirect(url_for('complete_signup'))

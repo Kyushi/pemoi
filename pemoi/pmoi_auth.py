@@ -5,7 +5,8 @@ from flask import session as login_session, \
                   render_template, \
                   request, \
                   flash, \
-                  redirect
+                  redirect, \
+                  url_for
 
 from pemoi import app
 from .pmoi_helpers import make_state
@@ -98,7 +99,7 @@ def complete_signup():
             except Exception as e:
                 print(e, "Could not create user directory")
             flash("Welcome to your Personal Museum of Inspiration, %s" % login_session['username'])
-            return redirect('index')
+            return redirect(url_for('index'))
 
     else:
         return render_template('signup.html')
@@ -114,7 +115,7 @@ def logout():
         fbdisconnect()
     login_session.clear()
     flash("You have been logged out. Come back soon!")
-    return redirect('/')
+    return redirect(url_for('index'))
 
 @app.route('/privacy/')
 def privacy():

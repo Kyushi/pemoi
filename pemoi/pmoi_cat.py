@@ -70,7 +70,7 @@ def categories_json():
 # Routes
 
 # Route for ajax check
-@app.route('/checkcatname', methods=['POST'])
+@app.route('/checkcatname/', methods=['POST'])
 def check_catname():
     """Check that no public category name is double"""
     data = request.json
@@ -156,11 +156,11 @@ def edit_category(category_id):
         return redirect('/')
     if 'user_id' not in login_session:
         flash("Please log in to edit categories.")
-        return redirect('/login')
+        return redirect(url_for('login'))
     # Make sure that user can only their own categories
     elif login_session['user_id'] != category.user_id:
         flash("You can only edit categories that you have created yourself")
-        return redirect("/category/%s" % category_id)
+        return redirect(url_for('category', category_id=category_id))
     else:
         if request.method == 'POST':
             name = request.form['name']
@@ -175,7 +175,7 @@ def edit_category(category_id):
             category.description = request.form['description']
             db_session.add(category)
             db_session.commit()
-            return redirect("/category/%s" % category_id)
+            return redirect(url_for('category', category_id=category_id))
         else:
             return render_template('editcategory.html',
                                     category=category)
@@ -187,13 +187,13 @@ def delete_category(category_id):
         category = db_session.query(Category).filter_by(id=category_id).one()
     except:
         flash("This category does not exist yet")
-        return redirect('/')
+        return redirect(url_for('index'))
     if 'user_id' not in login_session:
         flash("Please log in to delete categories.")
-        return redirect('/login')
+        return redirect(url_for('login'))
     elif login_session['user_id'] != category.user_id:
         flash("You can only delete categories that you have created yourself")
-        return redirect("/category/%s" % category_id)
+        return redirect(url_for('category', category_id=category_id))
     elif category.items:
         flash("""This category has items in it. You can only delete an empty
               category (There may be private items in there)""")
@@ -202,7 +202,7 @@ def delete_category(category_id):
         if request.method == 'POST':
             db_session.delete(category)
             db_session.commit()
-            return redirect('/')
+            return redirect(url_for('index'))
         else:
             return render_template('deletecategory.html',
                                     category=category)
