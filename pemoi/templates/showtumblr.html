@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="col-xs-12">
+    <p>Showing {{offset}}-{{offset+limit}} of {{total_posts}}</p>
+  </div>
+  {% for item in items %}
+  <div class="col-xs-12 item-box">
+    <img src="{{item.link}}" class="item-img"><br>
+    {{item.caption}}
+    <p>{{item.blog_name}}</p>
+    <a href="{{item.post_url}}" target="_blank">Link to original post</a><br>
+  </div>
+  {% endfor %}
+  <div class="col-xs-6">
+    <form class="form-horizontal" method="POST">
+        <div class="form-group">
+          <label for="name">
+            Tumblr name:
+          </label>
+          <input type="text"
+                 name="name"
+                 class="form-control"
+                 placeholder="tumblr name"
+                 id="tumblrname"
+                 required>
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <label for="offset">
+            Offset:
+          </label>
+          <input type="number"
+                 name="offset"
+                 class="form-control"
+                 value=0
+                 id="offset">
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <label for="n_items">
+            Show images (0-20):
+          </label>
+          <input type="number"
+                 name="n_items"
+                 max="20"
+                 class="form-control"
+                 value=0
+                 id="n_items">
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Load images" class="submit" id="submit">
+        </div>
+      </form>
+  </div>
+
+{% endblock %}

@@ -13,6 +13,7 @@ import pemoi.githuboauth
 import pemoi.googleoauth
 import pemoi.pmoi_index
 import pemoi.pmoi_item
+import pemoi.pmoi_tumblr
 import pemoi.pmoi_user
 import pemoi.pmoi_helpers
 

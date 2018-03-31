@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="row">
+  <div class="col-xs-12">
+    <div class="form-box">
+      <form class="form-horizontal" method="POST">
+        <div class="form-group">
+          <label for="name">
+            Tumblr name:
+          </label>
+          <input type="text"
+                 name="name"
+                 class="form-control"
+                 placeholder="tumblr name"
+                 id="tumblrname"
+                 value="{{tumblr_name}}"
+                 required>
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <label for="name">
+            Tag:
+          </label>
+          <input type="text"
+                 name="tag"
+                 class="form-control"
+                 placeholder="tag"
+                 value="{{tag}}"
+                 id="tag">
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <label for="offset">
+            Offset:
+          </label>
+          <input type="number"
+                 name="offset"
+                 class="form-control"
+                 value=0
+                 id="offset">
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <label for="n_items">
+            Show images (0-20):
+          </label>
+          <input type="number"
+                 name="n_items"
+                 max="20"
+                 class="form-control"
+                 value=20
+                 id="n_items">
+          <p class="error text-small" id="tumblr-warning"><p>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Load images" class="submit" id="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  {% if items %}
+  <div class="col-xs-12">
+    <p>Showing {{offset}}-{{max_post}} of {{total_posts}}</p>
+  </div>
+  {% for item in items %}
+  <div class="col-xs-12 item-box">
+    <img src="{{item.link}}" class="item-img"><br>
+    {{item.caption}}
+    <p>{{item.blog_name}}</p>
+    <a href="{{item.post_url}}" target="_blank">Link to original post</a><br>
+    <p>{{(', ').join(item.tags)}}</p>
+  </div>
+  {% endfor %}
+
+  {% if max_post < total_posts %}
+  <div class="col-xs-6">
+    <div class="form-box">
+      <form class="form-horizontal" method="POST">
+        <div class="form-group">
+          <input type="hidden" name="name" value="{{tumblr_name}}" id="name">
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="limit" value="{{limit}}" id="limit">
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="offset" value="{{offset + limit}}" id="offset">
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="tag" value="{{tag}}" id="tag">
+        </div>
+        <div class="form-group">
+          {{offset}} - {{max_post}}
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Next {{limit}}" class="submit" id="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+</section>
+
+{% endblock %}
