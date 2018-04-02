@@ -60,6 +60,11 @@ def edit_profile(user_id):
             olddir = os.path.join(app.config['UPLOAD_FOLDER'], user.username)
             newdir = os.path.join(app.config['UPLOAD_FOLDER'], username)
             os.rename(olddir, newdir)
+            # Change the user's file's links
+            items = get_user_items(user.id)
+            for item in items:
+                item.link = item.link.replace("/" + user.username + "/", "/" + username + "/")
+                db_session.add(item)
         except OSError as err:
             # If there is a problem renaming the directory, throw an error.
             # This will have to be handled manually for now.

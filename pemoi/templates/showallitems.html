@@ -9,7 +9,9 @@
     </div>
     <span> Added by {{item.user.username}}, ID {{session['user_id']}} </span>
   </div>
-  <img src="{{item.link}}" class="item-img"><br>
+  <a href="{{url_for('show_item', id=item.id)}}">
+    <img src="{{item.link}}" class="item-img"><br>
+  </a>
   <p>ID: {{item.id}}</p>
   <p>Title: {{item.title}}</p>
   <p>Artist: {{item.artist}}</p>

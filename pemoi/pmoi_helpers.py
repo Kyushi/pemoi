@@ -10,6 +10,8 @@ from sqlalchemy.orm.exc import NoResultFound
 from .pmoi_db_session import db_session
 from .database_setup import User, Category
 
+FORBIDDEN_USER = ['static', 'user', 'admin', 'administrator', 'moderator']
+
 # Helper function for returning json
 def json_response(response_string, code):
     """Function for generating a json response
@@ -40,6 +42,8 @@ def username_error(username):
         unique.
     Return: Error message or None.
     """
+    if username in FORBIDDEN_USER:
+        return f"This username is not allowed: {username}"
     if not (len(username) >= 5 and len(username) <= 20):
         return "Bad length: %d (must be between 5 and 20)" % len(username)
     if not re.match(r'^[\w.-]+$', username):
