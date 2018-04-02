@@ -111,7 +111,7 @@ function catNameCheck() {
     // Use Ajax to check category name in the background.
     $.ajax({
       type: 'POST',
-      url: $base_url + '/checkcatname',
+      url: $base_url + '/checkcatname/',
       data: JSON.stringify($data),
       contentType: 'application/json; charset=utf-8',
       success: function(result) {

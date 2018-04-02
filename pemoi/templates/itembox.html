@@ -1,7 +1,9 @@
 <!-- Renders an item with public information -->
 <div class="item-box">
   {% include 'userbox.html' %}
-  <img src="{{item.link}}" class="item-img"><br>
+  <a href="{{url_for('show_item', item_id=item.id)}}">
+    <img src="{{item.link}}" class="item-img">
+  </a><br>
   <p>{{item.title}}, by {{item.artist}}</p>
   <p>{{item.note}}</p>
   <p>

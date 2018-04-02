@@ -11,6 +11,7 @@ from flask import flash, \
 from .database_setup import Category, Item
 from .pmoi_db_session import db_session
 from pemoi import app
+from config import URL_INSERT
 
 ### Helpers for categories
 
@@ -144,7 +145,7 @@ def new_category():
         db_session.refresh(category)
         return redirect(url_for('show_category', category_id=category.id))
     else:
-        return render_template('newcategory.html')
+        return render_template('newcategory.html', BASE_URL=URL_INSERT)
 
 @app.route('/category/<int:category_id>/edit/', methods={'GET', 'POST'})
 def edit_category(category_id):
@@ -178,7 +179,7 @@ def edit_category(category_id):
             return redirect(url_for('category', category_id=category_id))
         else:
             return render_template('editcategory.html',
-                                    category=category)
+                                    category=category, BASE_URL=URL_INSERT)
 
 @app.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
 def delete_category(category_id):

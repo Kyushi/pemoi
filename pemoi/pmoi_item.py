@@ -16,6 +16,7 @@ from .database_setup import Item, Category
 from .pmoi_db_session import db_session
 from .pmoi_cat import name_exists
 from .pmoi_helpers import check_img_link
+from config import URL_INSERT
 
 # set allowed extensions for upload
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -123,7 +124,7 @@ def new_item():
         flash("Inspiration successfully saved")
         return redirect(url_for('show_item', item_id=item.id))
     else:
-        return render_template('newitem.html')
+        return render_template('newitem.html', BASE_URL=URL_INSERT)
 
 
 # Edit an item
