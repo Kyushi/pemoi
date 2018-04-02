@@ -37,57 +37,57 @@ function signInCallback(authResult){
 
 // Facebook oauth signin
 // FB SDK
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1207930352610599',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  };
+// window.fbAsyncInit = function() {
+//     FB.init({
+//       appId      : '1207930352610599',
+//       xfbml      : true,
+//       version    : 'v2.8'
+//     });
+//   };
 
-(function(d, s, id){
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement(s); js.id = id;
-   js.src = "//connect.facebook.net/en_US/sdk.js";
-   fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
+// (function(d, s, id){
+//    var js, fjs = d.getElementsByTagName(s)[0];
+//    if (d.getElementById(id)) {return;}
+//    js = d.createElement(s); js.id = id;
+//    js.src = "//connect.facebook.net/en_US/sdk.js";
+//    fjs.parentNode.insertBefore(js, fjs);
+//  }(document, 'script', 'facebook-jssdk'));
 
 // FB login functions
-function sendTokenToServer() {
-  var auth_response = FB.getAuthResponse()
-  var access_token = FB.getAuthResponse()['accessToken'];
-  console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
-    console.log('Successful login for: ' + response.name);
-    $.ajax({
-      type: 'POST',
-      url: $base_url + '/fbconnect?state='+$state,
-      processData: false,
-      data: access_token,
-      contentType: 'application/octet-stream; charset=utf-8',
-      success: function(result) {
-      // Handle or verify the server response if necessary.
-      if (result) {
-        if (result == "new") {
-          $('#result').html('Thanks for signing in!<br>Please complete signup. Redirecting...')
-          setTimeout(function() {
-            window.location.href = "/completesignup";
-          }, 4000);
-        }
-        else {
-           $('#result').html('Welcome back, ' + result + '!<br>Redirecting to start page ...')
-           setTimeout(function() {
-             window.location.href = $base_url
-           }, 2000);
-         }
-      } else {
-        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
-         }
-      }
-    });
-  });
-}
+// function sendTokenToServer() {
+//   var auth_response = FB.getAuthResponse()
+//   var access_token = FB.getAuthResponse()['accessToken'];
+//   console.log('Welcome!  Fetching your information.... ');
+//   FB.api('/me', function(response) {
+//     console.log('Successful login for: ' + response.name);
+//     $.ajax({
+//       type: 'POST',
+//       url: $base_url + '/fbconnect?state='+$state,
+//       processData: false,
+//       data: access_token,
+//       contentType: 'application/octet-stream; charset=utf-8',
+//       success: function(result) {
+//       // Handle or verify the server response if necessary.
+//       if (result) {
+//         if (result == "new") {
+//           $('#result').html('Thanks for signing in!<br>Please complete signup. Redirecting...')
+//           setTimeout(function() {
+//             window.location.href = "/completesignup";
+//           }, 4000);
+//         }
+//         else {
+//            $('#result').html('Welcome back, ' + result + '!<br>Redirecting to start page ...')
+//            setTimeout(function() {
+//              window.location.href = $base_url
+//            }, 2000);
+//          }
+//       } else {
+//         $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+//          }
+//       }
+//     });
+//   });
+// }
 
 // Close button
 $(".close").on("click", function() {
