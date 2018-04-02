@@ -52,6 +52,28 @@ def get_tumblr_images(tumblr, limit, offset, tag):
             posts.append(tumblr_post)
     return posts, total_posts
 
+@app.route('/save_tumblr/', methods=['POST'])
+def save_tumblr():
+    if not 'user_id' in login_session:
+        return redirect(url_for('login'))
+    if not request.method == 'POST':
+        return "This method is not allowed"
+    item = Item(
+            link=request.form.get('link'),
+            title=request.form.get('title'),
+            artist='',
+            note=request.form.get('note'),
+            keywords=request.form.get('keywords'),
+            category_id=0,
+            user_id=login_session['user_id'],
+            public=False
+            )
+    db_session.add(item)
+    db_session.commit()
+    db_session.refresh(item)
+    flash("Item saved succesfully")
+    return redirect(url_for('show_item', item_id=item.id))
+
 @app.route('/tumblr/', methods=['GET', 'POST'])
 def tumblr():
     if request.method == 'POST':
@@ -63,7 +85,7 @@ def tumblr():
         if not items:
             flash("No images found")
         return render_template(
-            'tumblrselect.html', 
+            'tumblr.html', 
             items=items, 
             tumblr_name=tumblr_name, 
             offset=offset, 
@@ -72,4 +94,4 @@ def tumblr():
             tag=tag,
             max_post=min(total_posts, offset + limit)
             )
-    return render_template('tumblrselect.html')
+    return render_template('tumblr.html')
