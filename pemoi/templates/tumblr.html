@@ -87,11 +87,14 @@
       <a href="{{item.post_url}}" target="_blank">Link to original post</a><br>
       <p>
         {% for tag in item.tags %}
-        <a href="{{url_for('tumblr', name=tumblr_name, offset=0, limit=limit, tag=tag, _method='POST')}}">
-          {{tag}}
-        </a>
+        <form method="POST" action="{{url_for('tumblr')}}" class="form-inline">
+          <input type="hidden" name="name" value={{tumblr_name}} class="input-inline">
+          <input type="hidden" name="offset" value=0 class="input-inline">
+          <input type="hidden" name="limit" value={{limit}} class="input-inline">
+          <input type="hidden" name="tag" value="{{tag}}" class="input-inline">
+          <input type="submit" value="{{tag}}" class="submit-inline">
+        </form>
         {% endfor %}
-      </p>
       <form class="form-horizontal" method="POST" action="{{url_for('save_tumblr')}}" enctype=multipart/form-data>
         <input type="hidden" name="link" value="{{item.link}}">
         <input type="hidden" name="keywords" value="{{(', ').join(item.tags)}}">

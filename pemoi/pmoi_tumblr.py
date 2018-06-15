@@ -85,10 +85,10 @@ def tumblr():
         if not items:
             flash("No images found")
         return render_template(
-            'tumblr.html', 
-            items=items, 
-            tumblr_name=tumblr_name, 
-            offset=offset, 
+            'tumblr.html',
+            items=items,
+            tumblr_name=tumblr_name,
+            offset=offset,
             limit=limit,
             total_posts=total_posts,
             tag=tag,

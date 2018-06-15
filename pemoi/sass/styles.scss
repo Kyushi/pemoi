@@ -233,6 +233,18 @@ form {
   padding: 0.667em;
 }
 
+.form-inline {
+  width: auto;
+  float: left;
+}
+
+.input-inline,
+.submit-inline {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
 .submit {
   background: $white;
   padding: 0.5em 0.667em 0.333em 0.667em;
