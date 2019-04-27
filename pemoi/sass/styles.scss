@@ -245,6 +245,10 @@ form {
   background: none;
 }
 
+.form-inline:after {
+  clear:both;
+}
+
 .submit {
   background: $white;
   padding: 0.5em 0.667em 0.333em 0.667em;
@@ -303,10 +307,12 @@ figcaption {
 
 /* Main page styling */
 .item-img {
+  max-height: 100vh;
   max-width: 100%;
 }
 
 .item-box {
+  max-height: 100%;
   border: 1px solid $gold;
   border-radius: 1em;
   padding: 1.33em;

@@ -75,7 +75,7 @@
     </div>
   </div>
   {% if items %}
-  <div class="col-xs-12">
+  <div class="col-xs-12 main-view">
     <div class="col-xs-12">
       <p>Showing {{offset}}-{{max_post}} of {{total_posts}}</p>
     </div>
@@ -95,6 +95,7 @@
           <input type="submit" value="{{tag}}" class="submit-inline">
         </form>
         {% endfor %}
+      </p>
       <form class="form-horizontal" method="POST" action="{{url_for('save_tumblr')}}" enctype=multipart/form-data>
         <input type="hidden" name="link" value="{{item.link}}">
         <input type="hidden" name="keywords" value="{{(', ').join(item.tags)}}">
