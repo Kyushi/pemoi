@@ -36,20 +36,24 @@ class TumblrPost():
 def get_tumblr_images(tumblr, limit, offset, tag):
     posts = []
     total_posts = 0
-    result = tumblr_client.posts(tumblr, type='photo', limit=limit, offset=offset, tag=tag)
+    if tag:
+        result = tumblr_client.posts(tumblr, type='photo', limit=limit, offset=offset, tag=tag)
+    else:
+        result = tumblr_client.posts(tumblr, type='photo', limit=limit, offset=offset)
     if 'posts' in result:
         total_posts = result['total_posts']
         for post in result['posts']:
-            tumblr_post = TumblrPost(
-                post['blog_name'],
-                post['type'],
-                post['post_url'],
-                post['photos'][0]['original_size']['url'],
-                post['id'],
-                post['photos'][0]['caption'],
-                post['tags']
-                )
-            posts.append(tumblr_post)
+            if 'photos' in post:
+                tumblr_post = TumblrPost(
+                    post['blog_name'],
+                    post['type'],
+                    post['post_url'],
+                    post['photos'][0]['original_size']['url'],
+                    post['id'],
+                    post['photos'][0]['caption'],
+                    post['tags']
+                    )
+                posts.append(tumblr_post)
     return posts, total_posts
 
 @app.route('/save_tumblr/', methods=['POST'])
@@ -80,7 +84,7 @@ def tumblr():
         tumblr_name = request.form.get('name')
         offset = int(request.form.get('offset'))
         limit = int(request.form.get('n_items', 20))
-        tag = request.form.get('tag')
+        tag = request.form.get('tag').strip()
         items, total_posts = get_tumblr_images(tumblr_name, limit, offset, tag)
         if not items:
             flash("No images found")
