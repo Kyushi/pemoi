@@ -4,7 +4,7 @@
   <a href="{{url_for('show_item', item_id=item.id)}}">
     <img src="{{item.link}}" class="item-img">
   </a><br>
-  <p>{{item.title}}, by {{item.artist}}</p>
+  <p>{{item.title}}, {{item.artist}}</p>
   <p>{{item.note}}</p>
   <p>
     <a href="{{url_for('show_category', category_id=item.category.id)}}">

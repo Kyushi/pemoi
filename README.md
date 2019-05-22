@@ -47,4 +47,8 @@ Upon your first visit of the index page, an admin and a catchall category with I
 
 - Improve form validation by use of (more ajax)
 - Add local accounts (allow local login, non-OAuth)
-- Allow uploading/linking of texts (txt, pdf) and video
+- Allow uploading/writing/linking of texts (txt, pdf) and video
+- Hide private items from front page even if logged in (separate menu item, toggle private items)
+- Improve viewing experience (lightbox?)
+- Make it possible to change title, colour (theme?)
+- Sort/view by tag(s)
