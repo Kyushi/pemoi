@@ -19,7 +19,7 @@ def index():
     user_id = login_session.get("user_id")
     try:
         items = db_session.query(Item).filter(\
-                                (Item.public==True)| (Item.user_id==user_id)).\
+                                (Item.public==True) | ((Item.user_id==user_id) & Item.public==True)).\
                                 order_by(desc(Item.add_date)).all()
     except:
         # Make sure that there is something to be passed to the template.

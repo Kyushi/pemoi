@@ -52,3 +52,7 @@ Upon your first visit of the index page, an admin and a catchall category with I
 - Improve viewing experience (lightbox?)
 - Make it possible to change title, colour (theme?)
 - Sort/view by tag(s)
+- Improve mobile-friendliness by automatically creating different sizes of images (copy images from links locally (? copyright), use PIL/Pillow?
+- Add page to connect with google Photos API
+
+
